@@ -1,30 +1,37 @@
 import { motion } from "framer-motion";
 import { fadeIn } from "../../variants";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import emailjs from "emailjs-com";
-
-import {
-  RxArrowRight,
-} from "react-icons/rx";
+import { RxArrowRight } from "react-icons/rx";
 
 const Contact = () => {
   const form = useRef();
-
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const sendEmail = (e) => {
+    e.preventDefault();
+
     emailjs
       .sendForm(
-        'gmail',
-        "service_wgi1xan",
-        "template_l45oqpz",
-        e.target,
-        "mN0toCpARyFK1SNXi"
+        "service_ak09guj",
+        "template_bui5t7b",
+        form.current,
+        "w9dMi-hTwz77v7ebV"
       )
       .then(
         (result) => {
           console.log(result.text);
+          // Clear the input fields after successful submission
+          setName("");
+          setEmail("");
+          setMessage("");
+          // Display a toast notification
+          toast.success("Message sent!");
         },
         (error) => {
           console.log(error.text);
@@ -46,6 +53,7 @@ const Contact = () => {
             Let’s <span className="text-accent">connect.</span>
           </motion.h2>
           <motion.form
+            ref={form}
             onSubmit={sendEmail}
             variants={fadeIn("right", 0.2)}
             initial="hidden"
@@ -58,27 +66,30 @@ const Contact = () => {
                 type="text"
                 placeholder="name"
                 className="input"
-                name="user_name"
+                name="from_name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="email"
                 className="input"
-                name="user_email"
+                name="from_email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <input
-              type="text"
-              placeholder="subject"
-              className="input"
-              name="subject"
-            />
             <textarea
               placeholder="message"
               className="textarea"
               name="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
-            <button className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group">
+            <button
+              type="submit"
+              className="btn rounded-full border border-white/50 max-w-[170px] px-8 transition-all duration-300 flex items-center justify-center overflow-hidden hover:border-accent group"
+            >
               <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
                 Let’s talk
               </span>
@@ -87,6 +98,8 @@ const Contact = () => {
           </motion.form>
         </div>
       </div>
+      {/* Add the ToastContainer component to display notifications */}
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 };

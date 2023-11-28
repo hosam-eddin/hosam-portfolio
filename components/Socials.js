@@ -10,6 +10,12 @@ import {
 const Socials = () => {
   return (
     <div className="flex gap-x-5 text-xl">
+      <a href="" download="assets\Front-End-Developer-Resume-2.pdf">
+        <button className="hover:text-accent transition-all duration-300 ">
+          CV
+        </button>
+      </a>
+
       <Link
         href={"https://www.linkedin.com/in/hosam-sharaf-570245284/"}
         target="_blank"

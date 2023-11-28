@@ -14,6 +14,7 @@ const Header = () => {
             
           </div>
           </Link>
+          
           {/* Socials */}
           <Socials/>
         </div>

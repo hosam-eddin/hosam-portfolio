@@ -27,7 +27,6 @@ export const navData = [
 const Nav = () => {
   const router = useRouter();
   const pathname = router.pathname;
-  
 
   return (
     <nav className="flex flex-col items-center xl:justify-center gap-y-4 fixed h-max bottom-0 mt-auto xl:right-[2%] xl:max-w-md xl:w-16 xl:h-screen z-50 w-full ">
@@ -43,10 +42,11 @@ const Nav = () => {
             >
               <div className="absolute pr-14 right-0 hidden xl:group-hover:flex">
                 <div className="bg-white relative flex text-primary items-center p-[6px] rounded-[3px]">
-                  <div className="text-[12px] leading-none font-semibold capitalize ">{data.name}</div>
-                  
-                  <div className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2 "></div>
+                  <div className="text-[12px] leading-none font-semibold capitalize ">
+                    {data.name}
+                  </div>
 
+                  <div className="border-solid border-l-white border-l-8 border-y-transparent border-y-[6px] border-r-0 absolute -right-2 "></div>
                 </div>
               </div>
 
